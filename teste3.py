@@ -3,25 +3,34 @@ import networkx as nx
 def valores():
     pesos={}
     distancias={}
-    
-def GANHO_IMEDIATO(grafo)
+
+def GANHO_IMEDIATO(grafo):
+    pesos={}
+    distancias={}
+    pesos.keys=grafo.nodes
+    gargalos = list(nx.articulation_points(grafo))
+    pontes = list(nx.bridges(grafo))
+    centralidade = nx.betweenness_centrality(grafo)
+    livres = [v for v in grafo.nodes if grafo.nodes[v]["time"] == 0]
+    lista_nossa = [v for v in grafo.nodes if grafo.nodes[v]["time"] == 1]
+    lista_adversário = [v for v in grafo.nodes if grafo.nodes[v]["time"] == 2]
     meus={ c :  = 1 }
-    deles ← { c : time(c) = 2 }
-    para cada v com time(v) = 0
-        ganho(v) ← PONTOS(meus ∪ {v}, deles)
-    devolva o v de maior ganho(v)
+    #deles ← { c : time(c) = 2 }
+    #para cada v com time(v) = 0
+    #    ganho(v) ← PONTOS(meus ∪ {v}, deles)
+    #devolva o v de maior ganho(v)
 
-função PONTOS(meus, deles)
-    total ← 0
-    para cada vértice u
-        a ← min { d(c, u) : c ∈ meus }
-        b ← min { d(c, u) : c ∈ deles }
-        se a < b então total ← total + peso(u)
-        senão se a = b < ∞ então
-            total ← total + peso(u)/2
-    devolva total
+#função PONTOS(meus, deles)
+#    total ← 0
+#    para cada vértice u
+#        a ← min { d(c, u) : c ∈ meus }
+#        b ← min { d(c, u) : c ∈ deles }
+#        se a < b então total ← total + peso(u)
+#        senão se a = b < ∞ então
+#            total ← total + peso(u)/2
+#    devolva total
 
-▹ o mínimo de um conjunto vazio é ∞
+#▹ o mínimo de um conjunto vazio é ∞
 
 
 def estrategia_md(grafo):
