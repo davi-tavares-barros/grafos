@@ -1,59 +1,101 @@
 import networkx as nx
 
+def valores():
+    pesos={}
+    distancias={}
+    
+def GANHO_IMEDIATO(grafo)
+    meus={ c :  = 1 }
+    deles ← { c : time(c) = 2 }
+    para cada v com time(v) = 0
+        ganho(v) ← PONTOS(meus ∪ {v}, deles)
+    devolva o v de maior ganho(v)
+
+função PONTOS(meus, deles)
+    total ← 0
+    para cada vértice u
+        a ← min { d(c, u) : c ∈ meus }
+        b ← min { d(c, u) : c ∈ deles }
+        se a < b então total ← total + peso(u)
+        senão se a = b < ∞ então
+            total ← total + peso(u)/2
+    devolva total
+
+▹ o mínimo de um conjunto vazio é ∞
+
+
 def estrategia_md(grafo):
     pesos={}
     distancias={}
     pesos.keys=grafo.nodes
-    time_de_cada_vertice=[]
-    segundo_turno_é_nosso=False
     gargalos = list(nx.articulation_points(grafo))
     pontes = list(nx.bridges(grafo))
     centralidade = nx.betweenness_centrality(grafo)
+    livres = [v for v in grafo.nodes if grafo.nodes[v]["time"] == 0]
+    lista_nossa = [v for v in grafo.nodes if grafo.nodes[v]["time"] == 1]
+    lista_adversário = [v for v in grafo.nodes if grafo.nodes[v]["time"] == 2]
 
     for u in grafo.nodes:
-        if grafo.nodes[u]["time"]==1:
-            time_de_cada_vertice.append(1)
+        if grafo.node[u]["time"]==1:
+            lista_nossa.append(u)
         elif grafo.nodes[u]["time"]==2:
-            time_de_cada_vertice.append(2)
-        else:
-            time_de_cada_vertice.append(0)
+            lista_adversário.append(u)
     
-    z=[]
-    d=[]
-    for u in range(len(grafo.nodes)):
-        z.append(0)
-        d.append(2)
+    if len(lista_adversário)==len(lista_nossa):
+        #a gente começou a jogar.
+        if len(lista_adversário)==0 and len(lista_nossa)==0:
+            #nossa primeira jogada.
+            for u in livres:
 
-    if z==time_de_cada_vertice:
-        nosso_turno_é_o_primeiro=True
-    elif d==time_de_cada_vertice:
-        nosso_turno_é_o_primeiro=False
-        segundo_turno_é_nosso=True
+        elif len(lista_adversário)==1 and len(lista_nossa)==1:
+            #nossa segunda jogada
+            for u in livres:
+        elif len(lista_adversário)==2 and len(lista_nossa)==2:
+            #nossa terceira jogada
+            for u in livres:
+        
     else:
-        nosso_turno_é_o_primeiro=False
-
+        #o adversário que começou.
+        if len(lista_adversário)==1 and len(lista_nossa)==0:
+            #nossa primeira jogada.
+            for u in livres:
+        elif len(lista_adversário)==2 and len(lista_nossa)==1:
+            #segunda jogada
+            for u in livres:
+        elif len(lista_adversário)==3 and len(lista_nossa)==2:
+            #nossa terceira jogada
+            for u in livres:
+        
     for v in grafo.nodes:
+        #lista dos pesos
         pesos[v] = grafo.nodes[v]["peso"]
     
     for v in grafo.nodes:
+        #lista das distâncias
         distancias[v] = nx.single_source_shortest_path_length(grafo, v)
     
     for u in grafo.nodes:
         if not nosso_turno_é_o_primeiro:
             grafo.neighbors(u)
          #
-    if nosso_turno_é_o_primeiro:
+    
+    for v in livres:
+        ganho(v)=pontos    
+
+    #if nosso_turno_é_o_primeiro:
         lista=list()
         for u in grafo.nodes:
             if grafo[u]["time"]==0:
                 lista.append(grafo.nodes[u]["peso"]*distancias[v][u])
+        mediana_ponderada=min(sum(lista))
     else:
         if segundo_turno_é_nosso:
             dsadsa
         else:
             dsadas
+
+
         
-        mediana_ponderada=min(sum(lista))
             # mediana ponderada nx.single_source_shortest_path_length(grafo, i) #centro, nosso_turno
 
 #def func_mediana(grafo):
