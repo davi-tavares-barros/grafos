@@ -40,9 +40,8 @@ def PONTOS(grafo):
         dsadsadadsa
     else:
         for v in livres:
-            distancias_dos_nossos_vertices=[]
-            distancias_dos_vertices_adversário=[] 
-            nx.multi_source_dijkstra_path_length(grafo, {i for i in lista_nossa}, v)   #vertice candidato
+            distancias_dos_vertices_adversário=nx.multi_source_dijkstra_path_length(grafo, lista_nossa + [v], weight=None)
+            distancias_dos_nossos_vertices=nx.multi_source_dijkstra_path_length(grafo, lista_adversário + [v], weight=None)
             for u in grafo.nodes:
                 if u not in livres:
                     if u in lista_nossa:
