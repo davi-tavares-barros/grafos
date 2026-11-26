@@ -29,5 +29,8 @@ for i in somas.keys():
         menor_node.append(i)
 print(menor_node)    
 
-    
-    
+def smadosmad():
+    smadosmad()
+    def dasdsada():
+        dsadsadas
+    dasdsada()

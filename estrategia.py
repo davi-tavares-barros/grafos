@@ -28,61 +28,50 @@ def DISTANCIAS(grafo):
         distancias[v] = nx.single_source_shortest_path_length(grafo, v)
     return distancias
 
-def PONTOS(grafo):   
+def PONTOS(grafo):   #GANHO IMEDIATO
     pesos=PESOS(grafo)
     distancias=DISTANCIAS(grafo)
     livres, lista_nossa, lista_adversário=VERTICES(grafo)
     pontos={v:0 for v in livres}
 
-    if len(lista_adversário)==0 and len(lista_nossa)==0:
-        dsadasdasdas
-    elif len(lista_adversário)==1 and len(lista_nossa)==0:
-        dsadsadadsa
-    else:
-        for v in livres:
-            distancias_dos_vertices_adversário=nx.multi_source_dijkstra_path_length(grafo, lista_nossa + [v], weight=None)
-            distancias_dos_nossos_vertices=nx.multi_source_dijkstra_path_length(grafo, lista_adversário + [v], weight=None)
-            for u in grafo.nodes:
-                if u not in livres:
-                    if u in lista_nossa:
-                        distancias_dos_nossos_vertices.append(distancias[v][u])
-                    elif u in lista_adversário:
-                        distancias_dos_vertices_adversário.append(distancias[v][u])
-            nossa_menor_distancia = min(distancias_dos_nossos_vertices)
-            menor_distancia_adversário = min(distancias_dos_vertices_adversário)
-                    if nossa_menor_distancia==menor_distancia_adversário:
-                        #empate
-                        pontos[v]+=pesos[u]/2
-                    elif nossa_menor_distancia>menor_distancia_adversário:
-                        #vertice inimigo, 0 pontos
-                        nx.multi_source_dijkstra(grafo, {i for i in lista_nossa}, v)
-                    else:
-                        #vertice nosso
-                        pontos[v]+=pesos[u]
+    for v in livres:    #GANHO IMEDIATO
+        distancias_dos_nossos_vertices=nx.multi_source_dijkstra_path_length(grafo, lista_nossa + [v], weight=None)
+        if len(lista_adversário)!=0:
+            distancias_dos_vertices_adversário=nx.multi_source_dijkstra_path_length(grafo, lista_adversário, weight=None)
+        else:
+            distancias_dos_vertices_adversário=None
+        for u in grafo.nodes:
+            distancia_nossa_atual=distancias_dos_nossos_vertices[u]
+            distancias_adversário_atual=distancias_dos_vertices_adversário[u] if distancias_dos_vertices_adversário is not None else float("inf")
+            if distancia_nossa_atual==distancias_adversário_atual:
+                pontos[v]+=pesos[u]/2
+            elif distancia_nossa_atual<distancias_adversário_atual:
+                pontos[v]+=pesos[u]    
     return pontos
-        #pontos[v] = u for u in grafo.nodes if 
+
 
 def dados_estruturais(grafo):
     dsadas
 
 
 def ganho_imediato(grafo):
-    pesos=PESOS(grafo)
-    distancias=distancias(grafo)
+    #distancias=distancias(grafo)
     
 
-    livres, lista_nossa, lista_adversário=vertices(grafo)
+    #livres, lista_nossa, lista_adversário=vertices(grafo)
     #livres = [v for v in grafo.nodes if grafo.nodes[v]["time"] == 0]
     #lista_nossa = [v for v in grafo.nodes if grafo.nodes[v]["time"] == 1]
     #lista_adversário = [v for v in grafo.nodes if grafo.nodes[v]["time"] == 2]
 
-    for v in  livres:
-        for u in grafo.nodes:
-            a=min([i for i in distancias[v][u] if v in livres])
-            b=min([i for i in distancias[v][u] if v in lista_adversário])
-            if a<b:
-                total+=pesos[u]
-
+    #for v in  livres:
+    #    for u in grafo.nodes:
+    #        a=min([i for i in distancias[v][u] if v in livres])
+    #        b=min([i for i in distancias[v][u] if v in lista_adversário])
+    #        if a<b:
+    #            total+=pesos[u]
+    for i in PONTOS(grafo):
+        if PONTOS(grafo)[i]==max(PONTOS(grafo).values):
+            return 
 
     #deles ← { c : time(c) = 2 }
     #para cada v com time(v) = 0
