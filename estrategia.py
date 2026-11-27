@@ -29,30 +29,30 @@ def ESTRATEGIA(grafo):
         if len(lista_adversário)==0 and len(lista_nossa)==0:
             #nossa primeira jogada.
             for u in livres:
-
+                dsadas
         elif len(lista_adversário)==1 and len(lista_nossa)==1:
             #nossa segunda jogada
             for u in livres:
-
+                sadasda
         elif len(lista_adversário)==2 and len(lista_nossa)==2:
             #nossa terceira jogada
             for u in livres:
-        
+                dsadasd
     else:
         #o adversário que começou.
         if len(lista_adversário)==1 and len(lista_nossa)==0:
             #nossa primeira jogada.
             for u in livres:
-
+                dsdadas
         elif len(lista_adversário)==2 and len(lista_nossa)==1:
             #segunda jogada
             for u in livres:
-
+                dsadsa
         elif len(lista_adversário)==3 and len(lista_nossa)==2:
             #nossa terceira jogada
             for u in livres:
-    
-
+                sadasda
+                
     pontos={v:0 for v in livres}
     for v in livres:    #GANHO IMEDIATO
         distancias_dos_nossos_vertices=nx.multi_source_dijkstra_path_length(grafo, lista_nossa + [v], weight=None)
@@ -68,7 +68,7 @@ def ESTRATEGIA(grafo):
             elif distancia_nossa_atual<distancias_adversário_atual:
                 pontos[v]+=pesos[u]    
     for i in pontos:
-        if pontos[i]==max(PONTOS(grafo).values):
+        if pontos[i]==max(pontos[i].values):
             return pontos[i]
     
 
