@@ -44,14 +44,18 @@ for i in sorted(grafo.nodes):
 
 
 v=0
-
+x=0
 def C(v):
+    global x
     lista=list()
+    
     for u in sorted(grafo.nodes):
-        lista.append(grafo.nodes[u]["peso"]*distancias[v][u])
+        if v!=u:
+            x+=1
+            lista.append(grafo.nodes[u]["peso"]*distancias[v][u])
     return sum(lista)
 
-min(C(v))
+
 
 for m in sorted(grafo.nodes):
     print(C(m))
